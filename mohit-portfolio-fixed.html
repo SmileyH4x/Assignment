@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohit Yadav - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fallback styles in case Tailwind doesn't load */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Ensure background is always visible */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+
+        .bg-overlay-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.15), transparent 50%);
+        }
+
+        .bg-overlay-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(139,92,246,0.15), transparent 50%);
+        }
+
+        .bg-overlay-3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 40% 40%, rgba(16,185,129,0.1), transparent 50%);
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #60a5fa, #34d399, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #34d399;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-blue {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-blue:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-purple {
+            background-color: #7c3aed;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #6d28d9;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-emerald {
+            background-color: #059669;
+            color: white;
+        }
+
+        .btn-emerald:hover {
+            background-color: #047857;
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid;
+        }
+
+        .badge-blue {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-purple {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .badge-emerald {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-orange {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fdba74;
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .badge-pink {
+            background: rgba(236, 72, 153, 0.2);
+            color: #f9a8d4;
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .badge-gray {
+            background: rgba(71, 85, 105, 1);
+            color: #e2e8f0;
+            border-color: rgba(100, 116, 139, 1);
+        }
+
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-lg {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .text-blue { color: #60a5fa; }
+        .text-emerald { color: #34d399; }
+        .text-purple { color: #a78bfa; }
+        .text-orange { color: #fb923c; }
+        .text-pink { color: #f472b6; }
+        .text-slate-200 { color: #e2e8f0; }
+        .text-slate-300 { color: #cbd5e1; }
+        .text-slate-400 { color: #94a3b8; }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #34d399;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink 1s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #34d399; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mr-2 { margin-right: 0.5rem; }
+
+        .text-center { text-align: center; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .font-semibold { font-weight: 600; }
+        .font-medium { font-weight: 500; }
+
+        .space-y-1 > * + * { margin-top: 0.25rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+
+        .leading-relaxed { line-height: 1.625; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2563eb, #7c3aed);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            background: rgba(30, 41, 59, 0.3);
+            text-align: center;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Container -->
+    <div class="bg-container">
+        <div class="bg-overlay-1"></div>
+        <div class="bg-overlay-2"></div>
+        <div class="bg-overlay-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="fade-in" id="hero">
+                <h1>💻 Mohit Yadav</h1>
+                <div class="hero-subtitle">
+                    <span class="typing-animation">Computer Science Engineering Student</span>
+                </div>
+                <div class="hero-description">
+                    Specializing in Data Science • Building impactful digital systems • Passionate about scalable architectures
+                </div>
+                
+                <div class="btn-group">
+                    <a href="https://github.com/SmileyH4x" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohit-yadav-3b416728a" target="_blank" rel="noopener noreferrer" class="btn btn-purple">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="mailto:killerp456@gmail.com" class="btn btn-emerald">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-blue">About Me</h2>
+            <div class="card">
+                <p class="text-slate-200 leading-relaxed mb-4">
+                    I'm a curious and driven Computer Science Engineering student currently pursuing B.Tech with a specialization in Data Science at Bennett University. While not a traditional game developer, I share the same passion for building impactful digital systems — whether it's scalable backend architectures, data-driven applications, or full-stack platforms that improve lives.
+                </p>
+                <p class="text-slate-200 leading-relaxed mb-4">
+                    I've worked with C++, Python, and the fundamentals of Java, and I'm constantly evolving — learning how to design better systems, write cleaner code, and solve real-world problems through tech.
+                </p>
+                <p class="text-slate-200 leading-relaxed">
+                    Outside of tech, I'm a gamer, a music enthusiast, and someone who believes in blending creativity with logic. I believe in learning by building, and I love collaborating with like-minded developers and creators.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-emerald">🛠️ Skills & Expertise</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="flex items-center text-blue mb-4">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <polyline points="16,18 22,12 16,6"></polyline>
+                            <polyline points="8,6 2,12 8,18"></polyline>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Programming Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-blue">C++</span>
+                        <span class="badge badge-blue">Python</span>
+                        <span class="badge badge-blue">Java (Basics)</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center text-purple mb-4">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44L5.5 19a2.5 2.5 0 0 1-2.96-2.46V7.5A2.5 2.5 0 0 1 5 5l1.54-.44A2.5 2.5 0 0 1 9.5 2Z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Core Computer Science</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-purple">Data Structures</span>
+                        <span class="badge badge-purple">Algorithms</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center text-emerald mb-4">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Specialization</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-emerald">Data Science</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center text-orange mb-4">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Tools & Technologies</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-orange">MongoDB</span>
+                        <span class="badge badge-orange">React</span>
+                        <span class="badge badge-orange">Node.js</span>
+                        <span class="badge badge-orange">Express</span>
+                        <span class="badge badge-orange">JWT</span>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: span 2;">
+                    <div class="flex items-center text-pink mb-4">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Soft Skills</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-pink">Problem Solving</span>
+                        <span class="badge badge-pink">Team Collaboration</span>
+                        <span class="badge badge-pink">Curiosity-Driven Learning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-purple">📚 Education</h2>
+            <div class="space-y-6">
+                <div class="card">
+                    <div class="flex items-center text-blue mb-2">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <h3 class="text-2xl font-semibold">Bennett University</h3>
+                    </div>
+                    <p class="text-slate-300 mb-4">Bachelor of Technology – B.Tech, Computer Science</p>
+                    <p class="text-emerald font-semibold mb-2">Specialization: Data Science</p>
+                    <p class="text-slate-400">📍 2023 – 2027 (Currently in 3rd Year)</p>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center text-emerald mb-2">
+                        <svg class="icon mr-2" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <h3 class="text-2xl font-semibold">Kendriya Vidyalaya, Alwar</h3>
+                    </div>
+                    <p class="text-slate-300 mb-4">High School & Secondary Education</p>
+                    <div class="space-y-1">
+                        <p class="text-blue font-medium">Class XII (CBSE): 93.4%</p>
+                        <p class="text-blue font-medium">Class X (CBSE): 80.6%</p>
+                        <p class="text-slate-400">📍 2014 – 2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-orange">🚀 Featured Projects</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3 class="text-orange text-lg font-semibold mb-2">📚 Learnly – EdTech Q&A Platform</h3>
+                    <span class="badge badge-blue mb-3">Group Project</span>
+                    <p class="text-emerald font-medium mb-3">My Role: Frontend & UI Development</p>
+                    <p class="text-slate-200 mb-4 leading-relaxed">A full-stack educational platform offering academic support via a tokenized, community-driven Q&A system.</p>
+                    <ul class="text-slate-300 mb-4 space-y-1">
+                        <li>• Built UI using React and ShadCN UI, integrated with secure JWT auth</li>
+                        <li>• Collaborated on system diagrams and backend API consumption</li>
+                        <li>• Wrote documentation using IEEE-style citations</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-gray">React</span>
+                        <span class="badge badge-gray">Node.js</span>
+                        <span class="badge badge-gray">Express</span>
+                        <span class="badge badge-gray">MongoDB</span>
+                        <span class="badge badge-gray">AWS</span>
+                        <span class="badge badge-gray">JWT</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-orange text-lg font-semibold mb-2">🔫 Multiplayer Tank Game</h3>
+                    <span class="badge badge-blue mb-3">Personal Project</span>
+                    <p class="text-slate-200 mb-4 leading-relaxed">Developed a basic 2-player tank shooter using Python, focused on real-time event handling and object-oriented design.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-gray">Python</span>
+                        <span class="badge badge-gray">Pygame</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-orange text-lg font-semibold mb-2">🏭 Supply Chain Management System</h3>
+                    <span class="badge badge-blue mb-3">Data Science Project</span>
+                    <p class="text-slate-200 mb-4 leading-relaxed">A data science project built to optimize supply chain logistics and visualize performance.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-gray">Python</span>
+                        <span class="badge badge-gray">Pandas</span>
+                        <span class="badge badge-gray">Matplotlib</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-orange text-lg font-semibold mb-2">🧑‍💻 CodeBuddy – Browser-Based IDE</h3>
+                    <span class="badge badge-blue mb-3">Web Application</span>
+                    <p class="text-slate-200 mb-4 leading-relaxed">Designed an online IDE inspired by VS Code with file navigation, syntax highlighting, and real-time code editing.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-gray">React</span>
+                        <span class="badge badge-gray">CodeMirror</span>
+                        <span class="badge badge-gray">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: span 2;">
+                    <h3 class="text-orange text-lg font-semibold mb-2">🎓 EduRevamp – Learning Platform</h3>
+                    <span class="badge badge-blue mb-3">Educational Platform</span>
+                    <p class="text-slate-200 mb-4 leading-relaxed">An education portal with interactive quizzes and revision modules to improve retention and engagement.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-gray">React</span>
+                        <span class="badge badge-gray">MongoDB</span>
+                        <span class="badge badge-gray">Node.js</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-pink">📬 Get In Touch</h2>
+            <div class="grid grid-4">
+                <div class="card text-center">
+                    <svg class="icon-lg text-blue mx-auto mb-4" viewBox="0 0 24 24" style="margin: 0 auto 1rem auto;">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <p class="text-blue font-semibold mb-2">Phone</p>
+                    <p class="text-slate-200">+91-9352579208</p>
+                </div>
+
+                <div class="card text-center">
+                    <svg class="icon-lg text-emerald mx-auto mb-4" viewBox="0 0 24 24" style="margin: 0 auto 1rem auto;">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <p class="text-emerald font-semibold mb-2">Location</p>
+                    <p class="text-slate-200">Alwar, Rajasthan, India</p>
+                </div>
+
+                <div class="card text-center">
+                    <svg class="icon-lg text-purple mx-auto mb-4" viewBox="0 0 24 24" style="margin: 0 auto 1rem auto;">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <p class="text-purple font-semibold mb-2">Email</p>
+                    <p class="text-slate-200">killerp456@gmail.com</p>
+                </div>
+
+                <div class="card text-center">
+                    <svg class="icon-lg text-orange mx-auto mb-4" viewBox="0 0 24 24" style="margin: 0 auto 1rem auto;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <path d="M12 17h.01"></path>
+                    </svg>
+                    <p class="text-orange font-semibold mb-2">Languages</p>
+                    <p class="text-slate-200">Hindi (Native)</p>
+                    <p class="text-slate-200">English (Fluent)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Built with passion for technology and innovation • © 2025 Mohit Yadav</p>
+        </div>
+    </footer>
+
+    <script>
+        // Ensure the page loads properly
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Portfolio loaded successfully!');
+            
+            // Show hero section
+            const hero = document.getElementById('hero');
+            setTimeout(() => {
+                hero.classList.add('visible');
+            }, 500);
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add hover effects to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+
+        // Fallback in case Tailwind doesn't load
+        window.addEventListener('load', function() {
+            // Check if Tailwind loaded by testing a class
+            const testElement = document.createElement('div');
+            testElement.className = 'bg-blue-500';
+            document.body.appendChild(testElement);
+            
+            const computedStyle = window.getComputedStyle(testElement);
+            const backgroundColor = computedStyle.backgroundColor;
+            
+            document.body.removeChild(testElement);
+            
+            // If Tailwind didn't load, our fallback CSS will handle everything
+            if (backgroundColor === 'rgba(0, 0, 0, 0)' || backgroundColor === 'transparent') {
+                console.log('Using fallback CSS styles');
+            } else {
+                console.log('Tailwind CSS loaded successfully');
+            }
+        });
+    </script>
+</body>
+</html>
